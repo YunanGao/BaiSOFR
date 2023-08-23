@@ -121,7 +121,6 @@ BASOFR_fit <- fitBASOFR(y = data$y, X = data$X,
                         z = z,
                         burnin = 1000,
                         S = 1000)
-
 ```
 
 
