@@ -132,7 +132,7 @@ Here:
     # Visualize the ground truth beta functions
     plot_beta(beta_list = data$groundTruth$beta, x.grids = data$t.grid)
 
-![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 Given that we specified `beta_types = c('spiky','smooth','stepwise')` in
 the simulation code, the curves *β*<sub>1</sub>, *β*<sub>2</sub>, and
@@ -211,23 +211,23 @@ uses a Gibbs sampler to draw from the posterior distribution:
     #> Initializing the MCMC...
     #> Starting the Gibbs sampler...
     #> Gibbs sampler  10 % complete
-    #> [1] "2023-08-23 17:45:32 CDT"
+    #> [1] "2023-08-23 17:47:57 CDT"
     #> Gibbs sampler  20 % complete
-    #> [1] "2023-08-23 17:45:35 CDT"
+    #> [1] "2023-08-23 17:48:00 CDT"
     #> Gibbs sampler  30 % complete
-    #> [1] "2023-08-23 17:45:38 CDT"
+    #> [1] "2023-08-23 17:48:04 CDT"
     #> Gibbs sampler  40 % complete
-    #> [1] "2023-08-23 17:45:42 CDT"
+    #> [1] "2023-08-23 17:48:07 CDT"
     #> Gibbs sampler  50 % complete
-    #> [1] "2023-08-23 17:45:45 CDT"
+    #> [1] "2023-08-23 17:48:10 CDT"
     #> Gibbs sampler  60 % complete
-    #> [1] "2023-08-23 17:45:49 CDT"
+    #> [1] "2023-08-23 17:48:13 CDT"
     #> Gibbs sampler  70 % complete
-    #> [1] "2023-08-23 17:45:52 CDT"
+    #> [1] "2023-08-23 17:48:17 CDT"
     #> Gibbs sampler  80 % complete
-    #> [1] "2023-08-23 17:45:55 CDT"
+    #> [1] "2023-08-23 17:48:20 CDT"
     #> Gibbs sampler  90 % complete
-    #> [1] "2023-08-23 17:45:59 CDT"
+    #> [1] "2023-08-23 17:48:23 CDT"
     #> Gibbs sampler is done!
 
 Upon completion, `fitBASOFR()` returns an object containing the
@@ -252,7 +252,7 @@ To visualize the fit, we can use the `plot_BASOFR_fit()` function:
                     groundTruth = groundTruth.beta # optional
                     )
 
-![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-7-1.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-7-2.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-7-3.png)
+![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-7-1.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-7-2.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-7-3.png)
 
 As shown from the plots, the proposed Bayesian SOFR model manages to
 effectively capture the ground truth, even when faced with the task of
@@ -304,7 +304,7 @@ observation:
     #> End of 'fit-of-the-fit' process for beta 3  to obtain locally constant estimates.
     #> Start to extract the acceptable family... the simplest member in the acceptable family will be plotted automatically.
 
-![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-1.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-2.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-3.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-4.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-5.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9e68f0ad3.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-6.png)
+![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-1.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-2.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-3.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-4.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-5.png)![](/private/var/folders/ls/vvqf5_wj6gb3rzvg8j_7r3vw0000gn/T/Rtmpe5jQ1S/preview-ef9ec4fa256.dir/BaiSOFR_files/figure-markdown_strict/unnamed-chunk-8-6.png)
 
 `Interpret_SOFR()` automatically generates two plots for each regression
 function *β*<sub>*j*</sub>:
