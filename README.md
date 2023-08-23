@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Getting started with BaiSOFR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  
+
 bibliography: references.bib
 link-citations: true
 ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 The `BaiSOFR` package is a tool for fitting and interpreting Bayesian scalar-on-functional regression (SOFR) models, with the acronym `BaiSOFR` representing **Bayesian Adaptive and Interpretable Scalar-on-function regression**. The methods implemented in this package are derived from  ([@gao2022bayesian](https://arxiv.org/abs/2203.00784)). This document is designed to help new users get started with the main functionalities of `BaiSOFR` in R.
 
-# Introduction 
+# Introduction
 
 Scalar-on-function regression (SOFR) is a type of regression where a scalar response variable is predicted based on one or several functional predictor(s). An example of SOFR model is as follows:
 
@@ -26,9 +26,9 @@ $$
 y_i =  \mu + {\bf z_i}'{\bf\alpha} +  \sum_{j=1}^p\int_{\mathcal{T}_i} X_{j,i}( t)\beta_j (t)\ dt +\epsilon_i, \quad \epsilon_i \stackrel{iid}{\sim} \mathcal{N}(0, \sigma^2), \quad  i=1,...,n. \tag{1}
 $$
 
-In this model, the scalar response $y_i \in \mathbb{R}$ is linked to $p$ functional covariates $\{X_{j,i}: \mathcal{T}_i \rightarrow \mathbb{R}\}, \quad j=1,..,p$ and other scalar covariates $\bf z_i \in \mathbb{R}^{z_p}$. The compact domains $\mathcal{T}_i \subseteq \mathcal{T} \subset \mathbb{R}$ are subject-specific, and  $\mathcal{T}$ denotes the maximal domain over which the functional covariates $X_i$ may be observed. The integral term $\int_{\mathcal{T}_i} X_{j,i}(t)\beta_j (t)\ dt$ represents the cumulative effect of  $X_{j,i}$ over its domain $\mathcal{T}_i$, as captured by the unknown regression coefficient function $\beta_j$. The linear term $\bf z_i'\bf \alpha$ accounts for other scalar covariates that may influence the response $y_i$. 
+In this model, the scalar response $y_i \in \mathbb{R}$ is linked to $p$ functional covariates $\{X_{j,i}: \mathcal{T}_i \rightarrow \mathbb{R}\}, \quad j=1,..,p$ and other scalar covariates $\bf z_i \in \mathbb{R}^{z_p}$. The compact domains $\mathcal{T}_i \subseteq \mathcal{T} \subset \mathbb{R}$ are subject-specific, and  $\mathcal{T}$ denotes the maximal domain over which the functional covariates $X_i$ may be observed. The integral term $\int_{\mathcal{T}_i} X_{j,i}(t)\beta_j (t)\ dt$ represents the cumulative effect of  $X_{j,i}$ over its domain $\mathcal{T}_i$, as captured by the unknown regression coefficient function $\beta_j$. The linear term $\bf z_i'\bf \alpha$ accounts for other scalar covariates that may influence the response $y_i$.
 
-A closely related model to the SOFR model is the distributed lag model (DLM) [@dziak2019scalar]. In the DLM, the integral in (1) is replaced with multiple regression terms that utilize $\{X_{j,i}(t)\}$ as covariates. However, unlike the SOFR model, the DLM requires the functional covariates $X_{j,i}$ to be observed at the same discrete points for all observations. This requirement could be challenging to meet in practical applications. Therefore, we prefer the usage of the SOFR model. 
+A closely related model to the SOFR model is the distributed lag model (DLM) [@dziak2019scalar]. In the DLM, the integral in (1) is replaced with multiple regression terms that utilize $\{X_{j,i}(t)\}$ as covariates. However, unlike the SOFR model, the DLM requires the functional covariates $X_{j,i}$ to be observed at the same discrete points for all observations. This requirement could be challenging to meet in practical applications. Therefore, we prefer the usage of the SOFR model.
 
 
 This guide will walk you through two main functionalities of the `BaiSOFR` package using a simulated dataset:
@@ -36,7 +36,7 @@ This guide will walk you through two main functionalities of the `BaiSOFR` packa
 
 1. **Bayesian Scalar-on-Function Regression**: One of the key objectives in fitting a SOFR model is to estimate and characterize the unknown regression coefficient functions ${\beta_j}$, as these functions illustrate the influence of functional covariates $X_{j,i}$ on the scalar response $y_i$. The `BaiSOFR` package enables users to fit a Bayesian SOFR model to their data using the `fitBASOFR()` function. This Bayesian SOFR model is specifically designed to **capture both smooth and abrupt variations** in the association function $\{\beta_j\}$. It provides full posterior uncertainty quantification while maintaining computational scalability, concerning both the sample size and the number of observation points for each functional covariate.
 
-2. **Critical window selection for Bayesian SOFR Models**: The other main goal of fitting a SOFR model is to identify *critical windows*. These are regions within the domain $\mathcal{T}$ where $X_{j,i}$ are predictive of $y_i$, adjusted for other functional covariates and key confounding variables. Due to the high-dimensional and highly correlated nature of $X_{j,i}$, this task regarding SOFR interpretation is not trivial [@dziak2019scalar]. To improve interpretatbility, the `BaiSOFR` package offers **decision analysis** tools to extract more *interpretable* **locally constant point estimates** from **any** given Bayesian SOFR models using the `Interpret_SOFR()` function. 
+2. **Critical window selection for Bayesian SOFR Models**: The other main goal of fitting a SOFR model is to identify *critical windows*. These are regions within the domain $\mathcal{T}$ where $X_{j,i}$ are predictive of $y_i$, adjusted for other functional covariates and key confounding variables. Due to the high-dimensional and highly correlated nature of $X_{j,i}$, this task regarding SOFR interpretation is not trivial [@dziak2019scalar]. To improve interpretatbility, the `BaiSOFR` package offers **decision analysis** tools to extract more *interpretable* **locally constant point estimates** from **any** given Bayesian SOFR models using the `Interpret_SOFR()` function.
 
 We start from installing and loading the `BaiSOFR` package from
 [GitHub](https://github.com/) with:
@@ -91,7 +91,7 @@ Given that we specified `beta_types = c('spiky','smooth','stepwise')` in the sim
 
 # Bayesian SOFR Model
 
-Once the data is prepared, we are interested in fitting the SOFR model to obtain posterior inference for $\{\beta_1,\beta_2, \beta_3, \mu, {\bf\alpha}, \sigma^2 | y, X, \bf z\}$. It's important to note that the true regression function's shape, such as $\beta_1(t)$ in the plot above, may either vary smoothly or exhibit abrupt changes. If we fail to accurately capture the shape of the true regression function, we can end up with biased estimates and poorly calibrated uncertainty quantification for $\beta_j$, as well as suboptimal predictions for $y$. To adapt to both smooth and abrupt changes in $\beta_j$, we developed our method. A brief technical overview of our approach is provided in the [Bayesian SOFR Model Overview](#BASOFR_overview) section, and its application is demonstrated in the [Fitting a Bayesian SOFR Model](#BASOFR_fit) section. 
+Once the data is prepared, we are interested in fitting the SOFR model to obtain posterior inference for $\{\beta_1,\beta_2, \beta_3, \mu, {\bf\alpha}, \sigma^2 | y, X, \bf z\}$. It's important to note that the true regression function's shape, such as $\beta_1(t)$ in the plot above, may either vary smoothly or exhibit abrupt changes. If we fail to accurately capture the shape of the true regression function, we can end up with biased estimates and poorly calibrated uncertainty quantification for $\beta_j$, as well as suboptimal predictions for $y$. To adapt to both smooth and abrupt changes in $\beta_j$, we developed our method. A brief technical overview of our approach is provided in the [Bayesian SOFR Model Overview](#BASOFR_overview) section, and its application is demonstrated in the [Fitting a Bayesian SOFR Model](#BASOFR_fit) section.
 
 
 ## Bayesian SOFR Model Overview {#BASOFR_overview}
@@ -105,7 +105,7 @@ The Bayesian Scalar-on-Function Regression method serves as a useful tool for es
 \end{aligned}
 \]
 
-Here, $\{\psi_k\}_{k=1}^{K_B}$ represents a collection of equally-spaced B-spline bases, and DHS refers to the dynamic horseshoe prior [@kowal2019dynamic]. This *local* and *adaptive* shrinkage prior is beneficial for function estimation as it encourages smoothness but can also capture rapid changes in $\beta_j$. As a result, the BASOFR method has shown substantially superior performance in scenarios that features both smooth and abrupt changes, as evidenced in various simulation studies in @gao2022bayesian. 
+Here, $\{\psi_k\}_{k=1}^{K_B}$ represents a collection of equally-spaced B-spline bases, and DHS refers to the dynamic horseshoe prior [@kowal2019dynamic]. This *local* and *adaptive* shrinkage prior is beneficial for function estimation as it encourages smoothness but can also capture rapid changes in $\beta_j$. As a result, the BASOFR method has shown substantially superior performance in scenarios that features both smooth and abrupt changes, as evidenced in various simulation studies in @gao2022bayesian.
 
 ## Fiting a Bayesian SOFR Model {#BASOFR_fit}
 
@@ -116,7 +116,7 @@ The `fitBASOFR()` function serves as a straightforward tool to implement the pro
 z = cbind(scale(data$Z_continuous), data$Z_dummy)
 
 # Fit the BASOFR model
-BASOFR_fit <- fitBASOFR(y = data$y, X = data$X, 
+BASOFR_fit <- fitBASOFR(y = data$y, X = data$X,
                         t.grid = data$t.grid,  # seq(0, 1, length.out=200)
                         z = z,
                         burnin = 1000,
@@ -167,22 +167,22 @@ For demonstration, we use the previously fitted Bayesian Adaptive SOFR model to 
 BayesSOFR <- BASOFR_fit # It can be any Bayesian SOFR model, does not limit to our BASOFR model.
 
 SOFR_Interpret <- Interpret_SOFR(# the posterior samples
-                                 beta.post = BayesSOFR$beta.post, 
+                                 beta.post = BayesSOFR$beta.post,
                                  Alpha.post = BayesSOFR$Alpha.post,
                                  intercept.post = BayesSOFR$intercept.post,
                                  sigma2.post = BayesSOFR$sigma.2.post,
                                  # the data observations
-                                 y = data$y, 
-                                 X = data$X, 
+                                 y = data$y,
+                                 X = data$X,
                                  z = z,
                                  t.grid = data$t.grid)
-``` 
+```
 
 `Interpret_SOFR()` automatically generates two plots for each regression function $\beta_j$:
 
 The first plot shows how the predictive performance varies across locally constant point estimates with different complexity, specifically relative (% change) to the "best" model (dashed grey vertical line). For each regression function, while the predictive performance generally improves as complexity increases, it is clear that several simpler models are highly competitive. This is observation holds particularly true when considering predictive uncertainty.
 
-If we wish to select a single locally constant estimate, a compelling choice would be the simplest member in the acceptable family (solid grey vertical line). This choice represents the locally constant model with the simplest shape while still upholding the high standard for predictive accuracy. Subsequently, this simplest member in the acceptable family is presented in the second plot for each regression function. 
+If we wish to select a single locally constant estimate, a compelling choice would be the simplest member in the acceptable family (solid grey vertical line). This choice represents the locally constant model with the simplest shape while still upholding the high standard for predictive accuracy. Subsequently, this simplest member in the acceptable family is presented in the second plot for each regression function.
 
 
 Upon execution, the `Interpret_SOFR()` function returns a list, which includes the simplest member of the acceptable family (`simplest_acc_family`), all the locally constant estimates with different complexity (`locally_constant`), as well as their corresponding empirical (`empirical_MSE`) and uncertainty quantification of mean squared errors (`predictive_MSE`):
@@ -205,7 +205,7 @@ names(SOFR_Interpret)
 
 
 
-An interesting fact to note is that the simplest member of acceptable family often exhibits a stronger resemblance to the ground truth, especially when the ground truth takes a `stepwise` pattern (see the results above for $\beta_3$). Conversely, $\beta_2$, which exhibits a more gradually varying ground truth (`smooth`), has the simplest acceptable member encompassing a greater number of changing points. This occurs as the model strives to represent the smooth ground truth using locally constant segments. 
+An interesting fact to note is that the simplest member of acceptable family often exhibits a stronger resemblance to the ground truth, especially when the ground truth takes a `stepwise` pattern (see the results above for $\beta_3$). Conversely, $\beta_2$, which exhibits a more gradually varying ground truth (`smooth`), has the simplest acceptable member encompassing a greater number of changing points. This occurs as the model strives to represent the smooth ground truth using locally constant segments.
 
 
 
