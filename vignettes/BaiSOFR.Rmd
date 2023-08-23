@@ -1,6 +1,6 @@
 ---
 title: "Getting started with BaiSOFR"
-output: rmarkdown::github_document
+output: rmarkdown::md_document
 vignette: >
   %\VignetteIndexEntry{Getting started with BaiSOFR}
   %\VignetteEngine{knitr::rmarkdown}
