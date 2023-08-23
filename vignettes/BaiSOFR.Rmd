@@ -38,8 +38,11 @@ This guide will walk you through two main functionalities of the `BaiSOFR` packa
 
 2. **Critical window selection for Bayesian SOFR Models**: The other main goal of fitting a SOFR model is to identify *critical windows*. These are regions within the domain $\mathcal{T}$ where $X_{j,i}$ are predictive of $y_i$, adjusted for other functional covariates and key confounding variables. Due to the high-dimensional and highly correlated nature of $X_{j,i}$, this task regarding SOFR interpretation is not trivial [@dziak2019scalar]. To improve interpretatbility, the `BaiSOFR` package offers **decision analysis** tools to extract more *interpretable* **locally constant point estimates** from **any** given Bayesian SOFR models using the `Interpret_SOFR()` function. 
 
+We start from installing and loading the `BaiSOFR` package from
+[GitHub](https://github.com/) with:
 
 ```{r}
+# devtools::install_github("YunanGao/BaiSOFR")
 library(BaiSOFR)
 ```
 
@@ -109,7 +112,7 @@ Here, $\{\psi_k\}_{k=1}^{K_B}$ represents a collection of equally-spaced B-splin
 The `fitBASOFR()` function serves as a straightforward tool to implement the proposed SOFR method. This function only requires the inputs `y`, `X`, `z`, and `t.grid` from the SOFR model (1). In our example, `t.grid` corresponds to `seq(0,1,length.out=200)`, which are the points at which the functions $\{X_{ji}\}_{j=1}^p$ are observed, and also the points where $\beta_j$ will be estimated. Since the `fitBASOFR()` function does not perform any scaling or centering for pre-processing the `z` values, we recommend users to conduct any necessary pre-processing, such as normalization or standardization, before passing them into the `z` argument. The function uses a Gibbs sampler to draw from the posterior distribution:
 
 ```{r cache=TRUE}
-# Cbetareate the z-variables matrix
+# Create the z-variables matrix
 z = cbind(scale(data$Z_continuous), data$Z_dummy)
 
 # Fit the BASOFR model
